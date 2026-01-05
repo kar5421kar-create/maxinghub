@@ -3,265 +3,157 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MaxingHub | Look Maxing, Body Maxing & Height Maxing</title>
-
-  <meta name="description" content="MaxingHub helps you improve looks, body, and height with proven guides, blogs, and premium PDFs. 100% manual and trusted system." />
-  <meta name="keywords" content="look maxing, body maxing, height maxing, glow up, fitness, self improvement, posture, muscle building" />
-
+  <title>MaxingHub | Admin Dashboard</title>
   <style>
-    :root {
-      --primary: #2563eb;
-      --secondary: #22c55e;
-      --dark-bg: #0f172a;
-      --card-bg: #020617;
-      --text: #e5e7eb;
-    }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--dark-bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
-    header {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      padding: 40px 20px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.8rem;
-      letter-spacing: 1px;
-    }
-    nav {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    nav a, .admin-login-btn {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 8px 15px;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-    nav a:hover {
-      background: rgba(255,255,255,0.1);
-    }
-    .admin-login-btn {
-      background: rgba(0,0,0,0.3);
-      border: none;
-      cursor: pointer;
-    }
+    :root { --primary: #2563eb; --secondary: #22c55e; --dark: #0f172a; --card: #020617; --text: #e5e7eb; }
+    body { margin: 0; font-family: sans-serif; background: var(--dark); color: var(--text); line-height: 1.6; }
+    header { background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 30px; text-align: center; }
+    nav { margin-top: 15px; display: flex; justify-content: center; gap: 15px; }
+    nav a, .login-btn { color: white; text-decoration: none; font-weight: bold; cursor: pointer; background: rgba(0,0,0,0.2); padding: 5px 15px; border-radius: 5px; border: none; }
+    
+    section { padding: 40px 20px; max-width: 1000px; margin: auto; }
+    .card { background: var(--card); padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #1e293b; }
+    
+    /* Admin Panel Styling */
+    #admin-panel { display: none; background: #1e293b; border: 2px solid var(--secondary); padding: 20px; border-radius: 15px; margin-top: 20px; }
+    input, textarea { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #334155; background: #0f172a; color: white; box-sizing: border-box; }
+    .admin-btn { background: var(--secondary); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; }
+    
+    .blog-img { width: 100%; max-height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 15px; }
+    .price-tag { color: var(--secondary); font-weight: bold; font-size: 1.2rem; }
 
-    section {
-      padding: 60px 20px;
-      max-width: 1100px;
-      margin: auto;
-    }
-    h2 {
-      color: #60a5fa;
-      border-bottom: 2px solid #1e293b;
-      padding-bottom: 10px;
-      margin-bottom: 30px;
-    }
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 25px;
-    }
-    .card {
-      background: var(--card-bg);
-      border-radius: 14px;
-      padding: 25px;
-      border: 1px solid #1e293b;
-      transition: transform 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    /* Admin Styles */
-    #admin-panel {
-      display: none;
-      background: #1e293b;
-      border: 2px dashed #22c55e;
-      margin-top: 20px;
-    }
-    .login-modal {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: #1e293b;
-      padding: 40px;
-      border-radius: 14px;
-      z-index: 1000;
-      box-shadow: 0 0 100px rgba(0,0,0,0.9);
-      width: 90%;
-      max-width: 400px;
-    }
-    .login-modal input {
-      display: block;
-      width: 100%;
-      margin: 15px 0;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid #334155;
-      background: #0f172a;
-      color: white;
-      box-sizing: border-box;
-    }
-    .login-modal button {
-      width: 100%;
-      background: var(--primary);
-      color: white;
-      padding: 12px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    footer {
-      background: var(--card-bg);
-      text-align: center;
-      padding: 40px;
-      margin-top: 50px;
-      color: #9ca3af;
-    }
+    /* Modal */
+    #login-modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1e293b; padding: 30px; border-radius: 12px; z-index: 1000; width: 300px; box-shadow: 0 0 100px rgba(0,0,0,0.5); }
   </style>
 </head>
-
 <body>
 
 <header>
   <h1>MaxingHub</h1>
-  <p><strong>Optimize Your Potential</strong></p>
   <nav>
-    <a href="#look">Look Maxing</a>
-    <a href="#body">Body Maxing</a>
-    <a href="#height">Height Maxing</a>
-    <a href="#pdf">PDF Store</a>
-    <button class="admin-login-btn" onclick="toggleModal()">Admin Login</button>
+    <a href="#blog-container">Read Blogs</a>
+    <a href="#pdf-section">Buy PDFs</a>
+    <button class="login-btn" onclick="openModal()">Admin Access</button>
   </nav>
 </header>
 
-<div id="login-modal" class="login-modal">
-  <h3 style="margin-top:0">Admin Access</h3>
-  <input type="email" id="email" placeholder="Email (kartik123zdax@gmail.com)">
-  <input type="password" id="password" placeholder="Password (admin123)">
-  <button onclick="handleLogin()">Login</button>
-  <button onclick="toggleModal()" style="background:#4b5563; margin-top:10px">Close</button>
+<div id="login-modal">
+  <h3>Enter Admin Keys</h3>
+  <input type="email" id="adminEmail" placeholder="Email">
+  <input type="password" id="adminPass" placeholder="Password">
+  <button class="admin-btn" onclick="checkLogin()" style="width:100%">Login</button>
+  <button onclick="openModal()" style="background:none; border:none; color:gray; cursor:pointer; margin-top:10px; width:100%">Cancel</button>
 </div>
 
 <section id="admin-panel">
-  <h2>Admin Dashboard</h2>
-  <div class="card">
-    <p>✅ <strong>Access Granted:</strong> You can now manage your blogs and PDF links.</p>
-    <p>Admin Status: Active</p>
-    <button onclick="logout()" style="background:#ef4444; color:white; border:none; padding:10px; border-radius:5px; cursor:pointer;">Logout</button>
-  </div>
+  <h2>Create New Blog Post</h2>
+  <input type="text" id="postTitle" placeholder="Blog Title">
+  <input type="text" id="postImg" placeholder="Image URL (e.g. https://images.com/photo.jpg)">
+  <textarea id="postContent" rows="5" placeholder="Write your blog content here..."></textarea>
+  
+  <h3 style="margin-top:20px">Upload PDF Details</h3>
+  <input type="text" id="pdfName" placeholder="PDF Name">
+  <p>Default Price: <strong>₹100</strong></p>
+  
+  <button class="admin-btn" onclick="publishBlog()">Publish to Website</button>
+  <button onclick="logout()" style="background:red; color:white; border:none; padding:10px; border-radius:8px; margin-left:10px; cursor:pointer;">Logout</button>
 </section>
 
-<section id="look">
-  <h2>Look Maxing</h2>
-  <div class="card-grid">
+<section id="blog-container">
+  <h2>Recent Blogs</h2>
+  <div id="blog-list">
     <div class="card">
-      <h3>Face & Skin</h3>
-      <p>Scientific skincare routines, facial exercises, and grooming techniques for a sharper look.</p>
-    </div>
-    <div class="card">
-      <h3>Hair & Grooming</h3>
-      <p>Finding the right hairstyle for your face shape and beard maintenance tips.</p>
-    </div>
-  </div>
-</section>
-
-<section id="body">
-  <h2>Body Maxing</h2>
-  <div class="card-grid">
-    <div class="card">
-      <h3>Hypertrophy Training</h3>
-      <p>Workout splits designed for muscle growth and aesthetic frame building.</p>
-    </div>
-    <div class="card">
-      <h3>Nutrition Plans</h3>
-      <p>High-protein Indian diet plans tailored for muscle gain and fat loss.</p>
+      <p>No blogs published yet. Admin needs to post.</p>
     </div>
   </div>
 </section>
 
-<section id="pdf">
-  <h2>Premium PDF Store</h2>
-  <p style="background: rgba(34, 197, 94, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid var(--secondary);">
-    <strong>How to Buy:</strong> Contact Admin ➔ Pay via UPI ➔ Send Screenshot ➔ Receive PDF.
-  </p>
-  <div class="card-grid" style="margin-top: 20px;">
-    <div class="card" style="border: 1px solid var(--secondary);">
-      <h3>Ultimate Maxing Guide</h3>
-      <p>The complete 100+ page guide on height, body, and face transformation.</p>
-      <p><strong>Price:</strong> ₹299</p>
-      <a href="https://wa.me/918091923582" style="display:inline-block; background:var(--secondary); color:white; padding:10px 20px; border-radius:5px; text-decoration:none; font-weight:bold;">Buy via WhatsApp</a>
-    </div>
+<section id="pdf-section">
+  <h2>Premium PDFs (₹100 Each)</h2>
+  <div id="pdf-list" class="card">
+    <p>Contact admin to purchase via UPI.</p>
+    <h3>Complete Glow-Up Guide</h3>
+    <p class="price-tag">Price: ₹100</p>
+    <a href="https://wa.me/918091923582" class="admin-btn" style="text-decoration:none; display:inline-block">Buy via WhatsApp</a>
   </div>
 </section>
-
-<section id="contact">
-  <h2>Contact Support</h2>
-  <div class="card-grid">
-    <div class="card">
-      <h3>WhatsApp</h3>
-      <p>+91 8091923582</p>
-    </div>
-    <div class="card">
-      <h3>Email</h3>
-      <p>kartik123zdax@gmail.com</p>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <p>© 2026 MaxingHub | Build Your Best Version</p>
-  <p style="font-size: 0.8rem;">Manual Delivery System • Results May Vary</p>
-</footer>
 
 <script>
-  function toggleModal() {
+  // 1. LOGIN SYSTEM
+  function openModal() {
     const modal = document.getElementById('login-modal');
-    modal.style.display = (modal.style.display === 'block') ? 'none' : 'block';
+    modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
   }
 
-  function handleLogin() {
-    const email = document.getElementById('email').value;
-    const pass = document.getElementById('password').value;
-
-    if (email === "kartik123zdax@gmail.com" && pass === "admin123") {
-      alert("Welcome back, Kartik!");
-      document.getElementById('admin-panel').style.display = 'block';
+  function checkLogin() {
+    const e = document.getElementById('adminEmail').value;
+    const p = document.getElementById('adminPass').value;
+    // Check credentials securely
+    if(e === "kartik123zdax@gmail.com" && p === "admin123") {
+      localStorage.setItem('loggedIn', 'true');
+      showAdmin();
       document.getElementById('login-modal').style.display = 'none';
-      localStorage.setItem('maxingAdmin', 'true');
     } else {
-      alert("Access Denied: Incorrect Credentials");
+      alert("Wrong Access Keys");
+    }
+  }
+
+  function showAdmin() {
+    if(localStorage.getItem('loggedIn') === 'true') {
+      document.getElementById('admin-panel').style.display = 'block';
     }
   }
 
   function logout() {
-    localStorage.removeItem('maxingAdmin');
+    localStorage.removeItem('loggedIn');
     window.location.reload();
   }
 
-  // Keep admin logged in on refresh
-  window.onload = function() {
-    if (localStorage.getItem('maxingAdmin') === 'true') {
-      document.getElementById('admin-panel').style.display = 'block';
-    }
+  // 2. BLOG SYSTEM
+  function publishBlog() {
+    const title = document.getElementById('postTitle').value;
+    const img = document.getElementById('postImg').value;
+    const content = document.getElementById('postContent').value;
+
+    if(!title || !content) return alert("Title and Content are required!");
+
+    const blogData = { title, img, content };
+    let blogs = JSON.parse(localStorage.getItem('myBlogs') || '[]');
+    blogs.push(blogData);
+    localStorage.setItem('myBlogs', JSON.stringify(blogs));
+
+    alert("Blog Published!");
+    displayBlogs();
+    
+    // Clear inputs
+    document.getElementById('postTitle').value = '';
+    document.getElementById('postImg').value = '';
+    document.getElementById('postContent').value = '';
   }
+
+  function displayBlogs() {
+    const blogList = document.getElementById('blog-list');
+    const blogs = JSON.parse(localStorage.getItem('myBlogs') || '[]');
+    
+    if(blogs.length === 0) return;
+
+    blogList.innerHTML = '';
+    blogs.forEach(b => {
+      blogList.innerHTML += `
+        <div class="card">
+          ${b.img ? `<img src="${b.img}" class="blog-img">` : ''}
+          <h3>${b.title}</h3>
+          <p>${b.content}</p>
+        </div>
+      `;
+    });
+  }
+
+  // Run on load
+  window.onload = function() {
+    showAdmin();
+    displayBlogs();
+  };
 </script>
 
 </body>
