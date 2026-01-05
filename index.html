@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MaxingHub | Look Maxing, Body Maxing & Height Maxing</title>
+
+  <meta name="description" content="MaxingHub helps you improve looks, body, and height with proven guides, blogs, and premium PDFs. 100% manual and trusted system." />
+  <meta name="keywords" content="look maxing, body maxing, height maxing, glow up, fitness, self improvement, posture, muscle building" />
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #22c55e;
+      --dark-bg: #0f172a;
+      --card-bg: #020617;
+      --text: #e5e7eb;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--dark-bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      letter-spacing: 1px;
+    }
+    nav {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    nav a, .admin-login-btn {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 15px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.1);
+    }
+    .admin-login-btn {
+      background: rgba(0,0,0,0.3);
+      border: none;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    h2 {
+      color: #60a5fa;
+      border-bottom: 2px solid #1e293b;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      padding: 25px;
+      border: 1px solid #1e293b;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Admin Styles */
+    #admin-panel {
+      display: none;
+      background: #1e293b;
+      border: 2px dashed #22c55e;
+      margin-top: 20px;
+    }
+    .login-modal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #1e293b;
+      padding: 40px;
+      border-radius: 14px;
+      z-index: 1000;
+      box-shadow: 0 0 100px rgba(0,0,0,0.9);
+      width: 90%;
+      max-width: 400px;
+    }
+    .login-modal input {
+      display: block;
+      width: 100%;
+      margin: 15px 0;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+      background: #0f172a;
+      color: white;
+      box-sizing: border-box;
+    }
+    .login-modal button {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    footer {
+      background: var(--card-bg);
+      text-align: center;
+      padding: 40px;
+      margin-top: 50px;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>MaxingHub</h1>
+  <p><strong>Optimize Your Potential</strong></p>
+  <nav>
+    <a href="#look">Look Maxing</a>
+    <a href="#body">Body Maxing</a>
+    <a href="#height">Height Maxing</a>
+    <a href="#pdf">PDF Store</a>
+    <button class="admin-login-btn" onclick="toggleModal()">Admin Login</button>
+  </nav>
+</header>
+
+<div id="login-modal" class="login-modal">
+  <h3 style="margin-top:0">Admin Access</h3>
+  <input type="email" id="email" placeholder="Email (kartik123zdax@gmail.com)">
+  <input type="password" id="password" placeholder="Password (admin123)">
+  <button onclick="handleLogin()">Login</button>
+  <button onclick="toggleModal()" style="background:#4b5563; margin-top:10px">Close</button>
+</div>
+
+<section id="admin-panel">
+  <h2>Admin Dashboard</h2>
+  <div class="card">
+    <p>✅ <strong>Access Granted:</strong> You can now manage your blogs and PDF links.</p>
+    <p>Admin Status: Active</p>
+    <button onclick="logout()" style="background:#ef4444; color:white; border:none; padding:10px; border-radius:5px; cursor:pointer;">Logout</button>
+  </div>
+</section>
+
+<section id="look">
+  <h2>Look Maxing</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h3>Face & Skin</h3>
+      <p>Scientific skincare routines, facial exercises, and grooming techniques for a sharper look.</p>
+    </div>
+    <div class="card">
+      <h3>Hair & Grooming</h3>
+      <p>Finding the right hairstyle for your face shape and beard maintenance tips.</p>
+    </div>
+  </div>
+</section>
+
+<section id="body">
+  <h2>Body Maxing</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h3>Hypertrophy Training</h3>
+      <p>Workout splits designed for muscle growth and aesthetic frame building.</p>
+    </div>
+    <div class="card">
+      <h3>Nutrition Plans</h3>
+      <p>High-protein Indian diet plans tailored for muscle gain and fat loss.</p>
+    </div>
+  </div>
+</section>
+
+<section id="pdf">
+  <h2>Premium PDF Store</h2>
+  <p style="background: rgba(34, 197, 94, 0.1); padding: 15px; border-radius: 8px; border-left: 4px solid var(--secondary);">
+    <strong>How to Buy:</strong> Contact Admin ➔ Pay via UPI ➔ Send Screenshot ➔ Receive PDF.
+  </p>
+  <div class="card-grid" style="margin-top: 20px;">
+    <div class="card" style="border: 1px solid var(--secondary);">
+      <h3>Ultimate Maxing Guide</h3>
+      <p>The complete 100+ page guide on height, body, and face transformation.</p>
+      <p><strong>Price:</strong> ₹299</p>
+      <a href="https://wa.me/918091923582" style="display:inline-block; background:var(--secondary); color:white; padding:10px 20px; border-radius:5px; text-decoration:none; font-weight:bold;">Buy via WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact Support</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h3>WhatsApp</h3>
+      <p>+91 8091923582</p>
+    </div>
+    <div class="card">
+      <h3>Email</h3>
+      <p>kartik123zdax@gmail.com</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 MaxingHub | Build Your Best Version</p>
+  <p style="font-size: 0.8rem;">Manual Delivery System • Results May Vary</p>
+</footer>
+
+<script>
+  function toggleModal() {
+    const modal = document.getElementById('login-modal');
+    modal.style.display = (modal.style.display === 'block') ? 'none' : 'block';
+  }
+
+  function handleLogin() {
+    const email = document.getElementById('email').value;
+    const pass = document.getElementById('password').value;
+
+    if (email === "kartik123zdax@gmail.com" && pass === "admin123") {
+      alert("Welcome back, Kartik!");
+      document.getElementById('admin-panel').style.display = 'block';
+      document.getElementById('login-modal').style.display = 'none';
+      localStorage.setItem('maxingAdmin', 'true');
+    } else {
+      alert("Access Denied: Incorrect Credentials");
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem('maxingAdmin');
+    window.location.reload();
+  }
+
+  // Keep admin logged in on refresh
+  window.onload = function() {
+    if (localStorage.getItem('maxingAdmin') === 'true') {
+      document.getElementById('admin-panel').style.display = 'block';
+    }
+  }
+</script>
+
+</body>
+</html>
